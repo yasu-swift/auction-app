@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Http\Requests\ItemRequest;
 
 class ItemController extends Controller
 {
@@ -23,7 +24,7 @@ class ItemController extends Controller
         return view('items.create');
     }
 
-    public function store(Request $request)
+    public function store(ItemRequest $request)
     {
         //インスタンス化
         $item = new Item;
@@ -47,11 +48,11 @@ class ItemController extends Controller
         return view('items.edit', ['item' => $item]);
     }
 
-    public function update(Request $request, $id)
+    public function update(ItemRequest $request, $id)
     {
         //元のデータを取得
         $item = Item::find($id);
-        
+
         //値を用意
         $item->name = $request->name;
         $item->description = $request->description;
